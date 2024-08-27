@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+
+selected_file=$(find . \( -path ./.git -o -path ./.obsidian \) -prune -o -type f -print | fzf --keep-right)
+
+if [ -z "$selected_file" ]; then
+	exit 0
+fi
+
+tmux rename-window "$(basename $selected_file)"
+
+$VISUAL "$selected_file"

@@ -1,0 +1,12 @@
+#!/usr/bin/env sh
+
+zig_file=$(mktemp)
+
+curl -sLo $zig_file https://ziglang.org/download/index.json
+
+zig_version=$(jq -r '.master.version' $zig_file)
+zig_tarball=$(jq -r '.master."x86_64-linux".tarball' $zig_file)
+
+curl -sLo ~/storage/tmp/$zig_version.tar.xz $zig_tarball
+cd ~/.opt
+tar xf ~/storage/tmp/$zig_version.tar.xz -C .
