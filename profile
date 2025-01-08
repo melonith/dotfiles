@@ -13,8 +13,8 @@ if [ -n "$BASH_VERSION" ]; then
     fi
 fi
 
-export EDITOR="hx"
-export VISUAL="hx"
+export EDITOR="vim"
+export VISUAL="vim"
 
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/bin" ] ; then
@@ -40,6 +40,6 @@ fi
 # fi
  
 # set aliases or a test.
-alias ls='ls -A'
+alias ls='ls -A --color=auto'
 alias ll='ls -lA'
 alias tm='tmux attach -t main'

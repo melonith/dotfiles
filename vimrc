@@ -6,6 +6,8 @@ set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 
+set linebreak
+
 set smartindent
 " set textwidth=100
 set wrap
