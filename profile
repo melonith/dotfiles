@@ -1,9 +1,9 @@
 #!/usr/bin/env sh
 
 # start ssh-agent on system start
-if [ -z "$SSH_AGENT_PID" ]; then
-    eval "$(ssh-agent)"
-fi
+# if [ -z "$SSH_AGENT_PID" ]; then
+#     eval "$(ssh-agent)"
+# fi
 
 # if running bash
 if [ -n "$BASH_VERSION" ]; then
@@ -13,8 +13,8 @@ if [ -n "$BASH_VERSION" ]; then
     fi
 fi
 
-export EDITOR="vim"
-export VISUAL="vim"
+export EDITOR="hx"
+export VISUAL="hx"
 
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/bin" ] ; then
