@@ -1,0 +1,23 @@
+#!/usr/bin/sh
+
+if command -v hx >/dev/null ; then
+    export EDITOR="hx"
+    export VISUAL="hx"
+else
+    export EDITOR="vim"
+    export VISUAL="vim"
+fi
+
+export GOPATH="$HOME/.local/shared/go"
+if [ -d "$GOPATH/bin" ] ; then
+    PATH="$GOPATH/bin:$PATH"
+fi
+
+tm(){
+    if command -v tmux >/dev/null ; then
+    	tmux-sessionizer main
+    else
+    	printf "tmux not available.\n"
+    	return 1
+    fi
+}
