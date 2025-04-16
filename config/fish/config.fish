@@ -5,7 +5,7 @@ set -gx XDG_CONFIG_HOME "$HOME/.config"
 set -gx XDG_DATA_HOME "$HOME/.local/share"
 set -gx XDG_STATE_HOME "$HOME/.local/state"
 
-set -gpx PATH "$HOME/bin"
+# set -gpx PATH "$HOME/bin"
 set -gpx PATH "$HOME/.local/bin"
 
 set -gx GOPATH "$XDG_STATE_HOME/go"
@@ -25,8 +25,8 @@ set -gx PGPPATH "$GNUPGHOME"
 set -gx SQLITE_HISTORY "$XDG_STATE_HOME/sqlitehist"
 
 # Add editor and visual arguments
-set -gx EDITOR hx
-set -gx VISUAL hx
+set -gx EDITOR vim
+set -gx VISUAL vim
 
 if status is-interactive
     # Commands to run in interactive sessions can go here
