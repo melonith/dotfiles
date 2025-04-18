@@ -1,3 +1,7 @@
+" leader keys
+let maplocalleader=" "
+let mapleader=" "
+
 " indentation and wrapping
 set autoindent
 set smartindent
@@ -54,3 +58,16 @@ autocmd BufRead,BufNewFile *.h set shiftwidth=8
 autocmd BufRead,BufNewFile *.h set tabstop=8
 autocmd BufRead,BufNewFile *.h set shiftwidth=8
 
+" Packages and settings
+set nocompatible
+filetype plugin on
+
+let g:vimwiki_list = [{'path': '~/notes/',
+    \ 'syntax': 'markdown', 'ext': 'md'}]
+
+let g:vimwiki_global_ext = 0
+
+set rtp+=/usr/share/fzf
+
+" Custom keybinds
+nnoremap <leader>f :Files<CR>

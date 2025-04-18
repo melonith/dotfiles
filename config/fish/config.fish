@@ -28,6 +28,8 @@ set -gx SQLITE_HISTORY "$XDG_STATE_HOME/sqlitehist"
 set -gx EDITOR vim
 set -gx VISUAL vim
 
+# make fzf.vim use ripgrep for searching files
+set -gx  FZF_DEFAULT_COMMAND 'rg --files --hidden --smart-case --glob "!.git/*" --glob "!.obsidian/*"'
 if status is-interactive
     # Commands to run in interactive sessions can go here
     fish_vi_key_bindings
