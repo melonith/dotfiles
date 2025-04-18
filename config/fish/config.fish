@@ -30,6 +30,7 @@ set -gx VISUAL vim
 
 if status is-interactive
     # Commands to run in interactive sessions can go here
+    fish_vi_key_bindings
     if not tmux has-session -t main 2>/dev/null
         tmux new-session -ds main
     end
