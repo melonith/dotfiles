@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+
+if [ $# -eq 0 ]; then
+    $EDITOR "$HOME/notes/$(date +"%F").md"
+fi

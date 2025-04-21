@@ -62,12 +62,7 @@ autocmd BufRead,BufNewFile *.h set shiftwidth=8
 set nocompatible
 filetype plugin on
 
-let g:vimwiki_list = [{'path': '~/notes/',
-    \ 'syntax': 'markdown', 'ext': 'md'}]
-
-let g:vimwiki_global_ext = 0
-
-set rtp+=/usr/share/fzf
-
 " Custom keybinds
-nnoremap <leader>f :Files<CR>
+nnoremap <leader>f :Files!<CR>
+nnoremap <leader>t :Tags!<CR>
+nnoremap <leader>s :Rg!<CR>
