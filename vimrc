@@ -66,3 +66,28 @@ filetype plugin on
 nnoremap <leader>f :Files!<CR>
 nnoremap <leader>t :Tags!<CR>
 nnoremap <leader>s :Rg!<CR>
+
+function! Notes()
+    let l:notes_dir = expand("~/notes/")
+    let l:filename = l:notes_dir . strftime("%Y-%m-%d.md")
+    execute "edit " . l:filename
+    execute "normal! G"
+endfunction
+
+nnoremap <leader>n :call Notes()<CR>
+
+function! Todo()
+    let l:fname = expand('%:p')
+    let l:cursor_pos = getpos('.')
+    let l:notes_dir = expand("~/notes/")
+    let l:filename = l:notes_dir . strftime("%Y-%m-%d.md")
+    let l:content = (filereadable(l:filename)) ? readfile(l:filename) : []
+    let l:content += ["# TODO [[" . l:fname . ":" . l:cursor_pos[1] . "]]"]
+    call writefile(l:content, l:filename)
+    execute "edit " . l:filename
+    execute "normal! G"
+    execute "normal! o"`
+    execute "normal! i"
+endfunction
+
+nnoremap <leader>d :call Todo()<CR>
