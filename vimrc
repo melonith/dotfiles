@@ -77,17 +77,16 @@ endfunction
 nnoremap <leader>n :call Notes()<CR>
 
 function! Todo()
-    let l:fname = expand('%:p')
-    let l:cursor_pos = getpos('.')
+    let l:fname = expand('%')
+    let l:line = getpos('.')[1]
     let l:notes_dir = expand("~/notes/")
-    let l:filename = l:notes_dir . strftime("%Y-%m-%d.md")
+    let l:filename = l:notes_dir . "todo.md"
     let l:content = (filereadable(l:filename)) ? readfile(l:filename) : []
-    let l:content += ["# TODO [[" . l:fname . ":" . l:cursor_pos[1] . "]]"]
+    let l:content += ["- [ ] TODO [[" . l:fname . ":" . l:line . "]]"]
     call writefile(l:content, l:filename)
     execute "edit " . l:filename
     execute "normal! G"
-    execute "normal! o"`
-    execute "normal! i"
 endfunction
 
 nnoremap <leader>d :call Todo()<CR>
+

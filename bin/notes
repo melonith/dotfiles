@@ -2,4 +2,8 @@
 
 if [ $# -eq 0 ]; then
     $EDITOR "$HOME/notes/$(date +"%F").md"
+else
+    command="$1"
+    shift
+
 fi
