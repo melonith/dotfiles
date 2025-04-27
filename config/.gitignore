@@ -1,3 +1,7 @@
-gh/
-go/
-wslu/
+*
+!fish/
+!go/
+!npm/
+!tmux/
+!user-dirs.dirs/
+!user-dirs.locale/

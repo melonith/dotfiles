@@ -1,9 +1,17 @@
 #!/usr/bin/env sh
 
+todo() {
+    printf -- "- [ ] TODO %s\n" "$@"
+}
+
 if [ $# -eq 0 ]; then
     $EDITOR "$HOME/notes/$(date +"%F").md"
 else
     command="$1"
     shift
-
+    case "$command" in
+        todo|TODO|Todo) todo "$@" ;;
+        *) printf "Oops, we don't know that command %s\n" "$command" ;;
+    esac
 fi
+
