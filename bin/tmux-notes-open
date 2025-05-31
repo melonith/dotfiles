@@ -1,0 +1,15 @@
+#!/usr/bin/env sh
+
+tmux_running=$(pgrep tmux)
+if [ -z $TMUX ] && [ -z $tmux_running ] ; then
+    if tmux has-session -t notes ; then
+        tmux switch-client -t notes
+    else
+        tmux new-session -ds notes -c "$HOME/notes" "vim index.md"
+    fi
+else
+    tmux new-session -ds main
+    tmux new-session -ds notes -c "$HOME/notes" "vim index.md"
+fi
+
+tmux switch-client -t notes

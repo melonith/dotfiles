@@ -16,6 +16,7 @@ set -pgx PATH "$XDG_CONFIG_HOME/emacs/bin"
 
 # Various file locations.
 set -gx CARGO_HOME "$XDG_STATE_HOME/cargo"
+set -gx RUSTUP_HOME "$XDG_STATE_HOME/rustup"
 set -gx GNUPGHOME "$XDG_STATE_HOME/gnupg"
 set -gx LESSHISTFILE "$XDG_STATE_HOME/lesshist"
 set -gx MYSQL_HISTFILE "$XDG_STATE_HOME/mysqlhist"
@@ -29,7 +30,7 @@ set -gx EDITOR vim
 set -gx VISUAL vim
 
 # make fzf.vim use ripgrep for searching files
-set -gx  FZF_DEFAULT_COMMAND 'rg --files --hidden --smart-case --glob "!.git/*" --glob "!.obsidian/*"'
+set -gx  FZF_DEFAULT_COMMAND 'rg --no-ignore-vcs --files --hidden --smart-case --glob "!.git/*" --glob "!.obsidian/*"'
 if status is-interactive
     # Commands to run in interactive sessions can go here
     fish_vi_key_bindings

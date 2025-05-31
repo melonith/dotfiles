@@ -67,26 +67,7 @@ nnoremap <leader>f :Files!<CR>
 nnoremap <leader>t :Tags!<CR>
 nnoremap <leader>s :Rg!<CR>
 
-function! Notes()
-    let l:notes_dir = expand("~/notes/")
-    let l:filename = l:notes_dir . strftime("%Y-%m-%d.md")
-    execute "edit " . l:filename
-    execute "normal! G"
-endfunction
+let g:vimwiki_list = [{'path': '~/notes',
+                      \ 'syntax': 'markdown', 'ext': 'md'}]
 
-nnoremap <leader>n :call Notes()<CR>
-
-function! Todo()
-    let l:fname = expand('%')
-    let l:line = getpos('.')[1]
-    let l:notes_dir = expand("~/notes/")
-    let l:filename = l:notes_dir . "todo.md"
-    let l:content = (filereadable(l:filename)) ? readfile(l:filename) : []
-    let l:content += ["- [ ] TODO [[" . l:fname . ":" . l:line . "]]"]
-    call writefile(l:content, l:filename)
-    execute "edit " . l:filename
-    execute "normal! G"
-endfunction
-
-nnoremap <leader>d :call Todo()<CR>
-
+let g:vimwiki_global_ext = 0
