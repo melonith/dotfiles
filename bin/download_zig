@@ -1,12 +1,89 @@
 #!/usr/bin/env sh
 
-zig_file=$(mktemp)
+download_location=${DOWNLOAD_ZIG_LOCATION:-"$HOME/tmp/zig"}
+install_location=${INSTALL_ZIG_LOCATION:-"$HOME/.local/opt/zig"}
+# Below we create the download location with archive directory.
+# all previous versions of zig will be stored there
+# the currently used version will rest in the base directory.
+if [ ! -d "$download_location" ] ; then
+  mkdir -p "$download_location/archive"
+fi
 
-curl -sLo $zig_file https://ziglang.org/download/index.json
+if [ ! -d "$install_location" ] ; then
+  mkdir -p "$install_location"
+fi
 
-zig_version=$(jq -r '.master.version' $zig_file)
-zig_tarball=$(jq -r '.master."x86_64-linux".tarball' $zig_file)
+# This is how long to wait between download the zig index file.
+# By default it chooses 12 hours.
+download_limit=${DOWNLOAD_ZIG_LIMIT:-$((12 * 60 * 60))}
 
-curl -sLo ~/storage/tmp/$zig_version.tar.xz $zig_tarball
-cd ~/.opt
-tar xf ~/storage/tmp/$zig_version.tar.xz -C .
+zig_index_url="https://ziglang.org/download/index.json"
+downloadp=0
+
+# check if we have an index file.
+if [ -f "$download_location/index.json" ] ; then
+  # The index file exists, now we see how old it is.
+  current_time=$(date +%s)
+  file_mod_time=$(stat -c %Y "$download_location/index.json")
+  age_in_seconds=$((current_time - file_mod_time))
+  if [ "$age_in_seconds" -ge "$download_limit" ] ; then
+    downloadp=1
+  fi
+else
+  downloadp=1
+fi
+
+if [ "$downloadp" -eq 1 ] ; then
+  curl -Lo "$download_location/index.json" "$zig_index_url"
+fi    
+
+if command -v zig >/dev/null ; then
+  current_zig_version="$(zig version)"
+fi
+
+machine_arch=$(uname -m)
+machine_os=$(uname -s | tr "[:upper:]" "[:lower:]")
+machine_dbl="$machine_arch-$machine_os"
+
+zig_index_version=$(jq -r '.master.version' "$download_location/index.json")
+zig_tarball=$(jq --arg m "$machine_dbl" -r '.master.[$m].tarball' "$download_location/index.json")
+
+if [ -n "$current_zig_version" ] ; then
+  if [ "$current_zig_version" = "$zig_index_version" ] ; then
+    echo "Zig is already the newest version."
+    exit 0
+  else
+    # Right here we are going to just prompt the user(me! it's me! I'm the current user!)
+    printf "Currently installed zig is: %s\n" "$current_zig_version"
+    printf "Index zig is: %s\n" "$zig_index_version"
+    printf "(y/n) Install index zig? "
+    read -r ans
+    case "$ans" in
+      y|Y) ;;
+      n|N) printf "Keeping installed zig.\n" ; exit 0 ;;
+      *) echo "unknown answer." ; exit 1 ;;
+    esac
+  fi
+fi
+
+# Assume we were told to install the newest version of zig
+# but first, we are going to archive the previous install if a tar file exists.
+mv "$download_location/*.tar.xz" "$download_location/archive"
+
+curl -Lo "$download_location/$(basename "$zig_tarball")" "$zig_tarball"
+
+if [ $? -eq 0 ] ; then
+  tar xf "$download_location/$(basename "$zig_tarball")" --strip-components 1 -C "$install_location"
+fi
+
+# now we are going to see if our path exists.
+if [ ! -L "$HOME/bin/zig" ] || [ ! -L "$HOME/.local/bin/zig" ] ; then
+  if [ ! -e "$HOME/bin/zig" ] || [ ! -e "$HOME/.local/bin/zig" ] ; then
+    if [ -e "$HOME/bin" ] ; then
+      ln -sf "$install_location/zig" "$HOME/bin/zig"
+    elif [ -e "$HOME/.local/bin" ] ; then
+      ln -sf "$install_location/zig" "$HOME/.local/bin/zig"
+    fi
+  fi
+fi
+
