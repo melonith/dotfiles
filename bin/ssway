@@ -1,0 +1,9 @@
+#!/usr/bin/sh
+
+pipewire_running=$(pgrep pipewire)
+
+if [ -z "$pipewire_running" ] ; then
+  pipewire >/dev/null 2>&1 &
+fi
+
+dbus-run-session sway

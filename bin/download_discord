@@ -1,0 +1,10 @@
+#!/usr/bin/sh
+
+discord_url="https://discord.com/api/download?platform=linux&format=tar.gz"
+current_date="$(date +"%F")"
+curl -sLo "$HOME/tmp/$current_date-discord.tar.gz" "$discord_url"
+
+mkdir -p "$HOME/.local/opt"
+
+tar xf "$HOME/tmp/$current_date-discord.tar.gz" -C "$HOME/.local/opt/"
+printf "Discord updated!\n"

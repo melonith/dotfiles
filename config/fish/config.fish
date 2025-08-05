@@ -54,8 +54,8 @@ end
 set -gx FZF_DEFAULT_COMMAND 'rg --no-ignore-vcs --files --hidden --smart-case --glob "!.git/*" --glob "!.obsidian/*"'
 if status is-interactive
     # Commands to run in interactive sessions can go here
-    fish_vi_key_bindings
-    if not tmux has-session -t main 2>/dev/null
-        tmux new-session -ds main
-    end
+    # fish_vi_key_bindings
+    # if not tmux has-session -t main 2>/dev/null
+    #     tmux new-session -ds main
+    # end
 end
