@@ -39,9 +39,9 @@ if [ -f "$CARGO_HOME/env" ] ; then
   . "$CARGO_HOME/env"
 fi
 
-if command -v nvim >/dev/null ; then
-  export EDITOR="nvim"
-  export VISUAL="nvim"
+if command -v hx >/dev/null ; then
+  export EDITOR="hx"
+  export VISUAL="hx"
 else
   export EDITOR="vim"
   export VISUAL="vim"
