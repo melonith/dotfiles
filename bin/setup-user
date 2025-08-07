@@ -1,12 +1,13 @@
 #!/usr/bin/sh
 
 # create user-dirs.dirs directories
-if [ -f "$HOME/.config/users-dirs.dirs" ] ; then
+if [ -f "$HOME/.config/user-dirs.dirs" ] ; then
     tmp="$(mktemp)"
 
-    grep -E '^XDG' "$HOME/.config/user-dir.dirs" | cut -d'=' -f 2 > "$tmp"
+    grep -E '^XDG' "$HOME/.config/user-dirs.dirs" | cut -d'=' -f 2 > "$tmp"
 
-    for dir in "$(cat $tmp)"; do
+    for dir in $(cat $tmp); do
+        echo "$dir"
         eval mkdir -p "$dir"
     done
 
