@@ -1,0 +1,11 @@
+#!/usr/bin/sh
+
+if [ -f "$HOME/.config/users-dirs.dirs" ] ; then
+    tmp="$(mktemp)"
+
+    grep -E '^XDG' "$HOME/.config/user-dir.dirs" | cut -d'=' -f 2 > "$tmp"
+
+    for dir in "$(cat $HOME/.config/user-dir.dirs)"; do
+        eval mkdir -p "$dir"
+    done
+fi

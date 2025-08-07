@@ -1,5 +1,6 @@
 *
 !fish/
+!git/
 !go/
 !npm/
 !tmux/
