@@ -9,6 +9,7 @@ export CARGO_HOME="$XDG_STATE_HOME/cargo"
 export RUSTUP_HOME="$XDG_STATE_HOME/rustup"
 export GNUPGHOME="$XDG_STATE_HOME/gnupg"
 
+export HISTFILE="$XDG_STATE_HOME/shhist"
 export LESSHISTFILE="$XDG_STATE_HOME/lesshist"
 export MYSQL_HISTFILE="$XDG_STATE_HOME/mysqlhist"
 export SQLITE_HISTORY="$XDG_STATE_HOME/sqlitehist"
