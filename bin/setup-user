@@ -6,9 +6,11 @@ if [ -f "$HOME/.config/users-dirs.dirs" ] ; then
 
     grep -E '^XDG' "$HOME/.config/user-dir.dirs" | cut -d'=' -f 2 > "$tmp"
 
-    for dir in "$(cat $HOME/.config/user-dir.dirs)"; do
+    for dir in "$(cat $tmp)"; do
         eval mkdir -p "$dir"
     done
+
+    rm -fr "$tmp"
 fi
 
 # link all files from dotfiles
