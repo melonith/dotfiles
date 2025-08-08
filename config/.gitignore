@@ -1,9 +1,10 @@
-*
 !git/*
 !go/*
 !npm/*
 !tmux/*
 !foot/*
 !sway/**
+!helix/*
 !user-dirs.dirs
 !user-dirs.locale
+*
