@@ -1,9 +1,9 @@
 *
-!git/
-!go/
-!npm/
-!tmux/
-!foot/
-!sway/
-!user-dirs.dirs/
-!user-dirs.locale/
+!git/*
+!go/*
+!npm/*
+!tmux/*
+!foot/*
+!sway/**
+!user-dirs.dirs
+!user-dirs.locale
