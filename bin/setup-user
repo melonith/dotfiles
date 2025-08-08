@@ -7,7 +7,6 @@ if [ -f "$HOME/src/github.com/melonith/dotfiles/config/user-dirs.dirs" ] ; then
     grep -E '^XDG' "$HOME/src/github.com/melonith/dotfiles/config/user-dirs.dirs" | cut -d'=' -f 2 > "$tmp"
 
     for dir in $(cat $tmp); do
-        echo "$dir"
         eval mkdir -p "$dir"
     done
 
