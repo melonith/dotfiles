@@ -21,6 +21,10 @@ rm -fr "$HOME/.bash_profile" && ln -sf "$HOME/src/github.com/melonith/dotfiles/b
 rm -fr "$HOME/.bash_logout" && ln -sf "$HOME/src/github.com/melonith/dotfiles/bash_logout" "$HOME/.bash_logout"
 rm -fr "$HOME/.profile" && ln -sf "$HOME/src/github.com/melonith/dotfiles/profile" "$HOME/.profile"
 rm -fr "$HOME/bin" && ln -sf "$HOME/src/github.com/melonith/dotfiles/bin" "$HOME/bin"
-rm -fr "$HOME/.config" && ln -sf "$HOME/src/github.com/melonith/dotfiles/config" "$HOME/.config"
+# rm -fr "$HOME/.config" && ln -sf "$HOME/src/github.com/melonith/dotfiles/config" "$HOME/.config"
 rm -fr "$HOME/.vimrc" && ln -sf "$HOME/src/github.com/melonith/dotfiles/vimrc" "$HOME/.vimrc"
 rm -fr "$HOME/.inputrc" && ln -sf "$HOME/src/github.com/melonith/dotfiles/inputrc" "$HOME/.inputrc"
+
+for f in $HOME/src/github.com/melonith/dotfiles/config/*; do
+    ln -s $f $HOME/.config/
+done
