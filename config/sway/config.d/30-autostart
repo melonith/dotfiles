@@ -1,0 +1,10 @@
+exec pipewire
+exec mako
+
+assign [class="discord"] workspace 3
+assign [app_id="foot.main"] workspace 1
+assign [app_id="Firefox"] workspace 2
+
+exec discord
+exec firefox
+exec foot -a "foot.main" tm
