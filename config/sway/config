@@ -88,7 +88,8 @@ output eDP-1 resolution 1920x1200 position 0,0
     bindsym $mod+Shift+c reload
 
     # Exit sway (logs you out of your Wayland session)
-    bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+    # bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+    bindsym $mod+Shift+e exec ~/.config/sway/scripts/logout.sh
 #
 # Moving around:
 #
@@ -231,7 +232,7 @@ bar {
        background #232136
        focused_workspace #32323200 #3e8fb0 #e0def4
        inactive_workspace #32323200 #232136 #6E6A86
-       urgent_workspace #32323200 #ea9a97 #eb6f92
+       urgent_workspace #32323200 #ea9a97 #e0def4
    }
 }
 
