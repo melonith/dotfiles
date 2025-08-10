@@ -1,7 +1,22 @@
 #!/usr/bin/sh
 
 # create user-dirs.dirs directories
-if [ -f "$HOME/src/github.com/melonith/dotfiles/config/user-dirs.dirs" ] ; then
+# Add an extra check to see if we are in termux or not, as if we are, we will
+# make links to android storage directories instead.
+if [ -n "$TERMUX_VERSION" ] ; then
+    if [ ! -r "/storage/emulated/0" ] ; then
+        termux-setup-storage
+        rm -fr ~/storage
+    fi
+    mkdir "$HOME/media"
+    ln -s /storage/emulated/0 "$HOME/external"
+    ln -s /storage/emulated/0/Download "$HOME/tmp"
+    ln -s /storage/emulated/0/Documents "$HOME/docs"
+    ln -s /storage/emulated/0/DCIM "$HOME/media/camera"
+    ln -s /storage/emulated/0/Pictures "$HOME/media/image"
+    ln -s /storage/emulated/0/Movies "$HOME/media/video"
+    ln -s /storage/emulated/0/Music "$HOME/media/audio"
+elif [ -f "$HOME/src/github.com/melonith/dotfiles/config/user-dirs.dirs" ] ; then
     tmp="$(mktemp)"
 
     grep -E '^XDG' "$HOME/src/github.com/melonith/dotfiles/config/user-dirs.dirs" | cut -d'=' -f 2 > "$tmp"
@@ -20,7 +35,6 @@ rm -fr "$HOME/.bash_profile" && ln -sf "$HOME/src/github.com/melonith/dotfiles/b
 rm -fr "$HOME/.bash_logout" && ln -sf "$HOME/src/github.com/melonith/dotfiles/bash_logout" "$HOME/.bash_logout"
 rm -fr "$HOME/.profile" && ln -sf "$HOME/src/github.com/melonith/dotfiles/profile" "$HOME/.profile"
 rm -fr "$HOME/bin" && ln -sf "$HOME/src/github.com/melonith/dotfiles/bin" "$HOME/bin"
-# rm -fr "$HOME/.config" && ln -sf "$HOME/src/github.com/melonith/dotfiles/config" "$HOME/.config"
 rm -fr "$HOME/.vimrc" && ln -sf "$HOME/src/github.com/melonith/dotfiles/vimrc" "$HOME/.vimrc"
 rm -fr "$HOME/.inputrc" && ln -sf "$HOME/src/github.com/melonith/dotfiles/inputrc" "$HOME/.inputrc"
 

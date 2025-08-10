@@ -41,23 +41,6 @@ set mouse=a
 
 set clipboard=unnamedplus
 
-" Changes depending on file extensions
-autocmd BufRead,BufNewFile *.sh set textwidth=200
-
-autocmd BufRead,BufNewFile *.txt setlocal spell
-" autocmd BufRead,BufNewFile *.txt set textwidth=79
-
-autocmd BufRead,BufNewFile *.md setlocal spell
-autocmd BufRead,BufNewFile *.md set wrap
-" autocmd BufRead,BufNewFile *.md set textwidth=79
-
-autocmd BufRead,BufNewFile *.c set noexpandtab
-autocmd BufRead,BufNewFile *.c set shiftwidth=8
-autocmd BufRead,BufNewFile *.c set tabstop=8
-autocmd BufRead,BufNewFile *.h set shiftwidth=8
-autocmd BufRead,BufNewFile *.h set tabstop=8
-autocmd BufRead,BufNewFile *.h set shiftwidth=8
-
 " Packages and settings
 set nocompatible
 filetype plugin on
