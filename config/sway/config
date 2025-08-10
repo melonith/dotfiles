@@ -25,7 +25,7 @@ set $menu wmenu-run -f "pango:GoMono NerdFont 17"
 default_border none
 default_floating_border normal
 font pango:GoMono nerd font 15
-output * bg /usr/share/void-artwork/void-transparent.png center
+output * bg /usr/share/void-artwork/void-transparent.png center #232136
 #
 # Example configuration:
 #
